@@ -1,26 +1,34 @@
-class FlatIterator:
-
+class FlatIterator: 
+    # Изменения с учетом рекоменлаций преподавателя.
+    # Его замечание: "В текущей реализации первого задания создается копия всех списков, 
+    # что значительно увеличивает потребление памяти, 
+    # на больших данных это может приводить к проблемам."
+  
     def __init__(self, list_of_list):
         self.list_of_list = list_of_list
-        self.flat_list = []
-        self.get_flat_list(self.list_of_list)
-        self.index = -1
-
-    def get_flat_list(self, list_of_list):
-        for item in list_of_list:
-            if isinstance(item, list):
-                self.get_flat_list(item)
-            else:
-                self.flat_list.append(item)
 
     def __iter__(self):
+        self.iters_stack = [iter(self.list_of_list)]
         return self
 
     def __next__(self):
-        self.index += 1
-        if self.index >= len(self.flat_list):
-            raise StopIteration
-        return self.flat_list[self.index]
+        while self.iters_stack:
+            try:
+                next_item = next(self.iters_stack[-1])
+                #  пытаемся получить следующий элемент
+            except StopIteration:
+                self.iters_stack.pop()
+                #  если не получилось, значит итератор пустой
+                continue
+
+            if isinstance(next_item, list):
+                # если следующий элемент оказался списком, то
+                # добавляем его итератор в стек
+                self.iters_stack.append(iter(next_item))
+
+            else:
+                return next_item
+        raise StopIteration
 
 
 def test():
