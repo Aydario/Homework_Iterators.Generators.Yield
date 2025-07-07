@@ -1,0 +1,42 @@
+# Временные файлы Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Файлы окружения
+.env
+.venv
+env/
+venv/
+ENV/
+
+# Логи и кэш
+*.log
+*.cache
+.pytest_cache/
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Установочные файлы
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Базы данных
+*.db
+*.sqlite
+
+# Файлы зависимостей
+pip-wheel-metadata/
+
+# Тестовые покрытия
+.coverage
+htmlcov/

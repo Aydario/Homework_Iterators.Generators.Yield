@@ -1,6 +1,8 @@
 import types
+from logger import logger
 
 
+@logger('loger.log')
 def flat_generator(list_of_lists):
     
     for item in list_of_lists:
